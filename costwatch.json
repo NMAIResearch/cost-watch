@@ -131,6 +131,34 @@
         "Whether supplier capex signals (the TSMC pattern) harden into hyperscaler-guidance cuts.",
         "Whether AI spend proves additive to IT budgets or crowds them out (the IBM channel)."
       ]
+    },
+    {
+      "n": 6,
+      "week": "Week of 29 July 2026",
+      "pub": "30 July 2026",
+      "doi": "10.5281/zenodo.21694902",
+      "status": "EXPANSIONARY",
+      "trigger": false,
+      "thread": "The signal was testable for the first time and did not fire. What moved instead was the market's willingness to fund a raise: the same direction of spend drew opposite reactions on the same evening, sorted on whether contracted demand covers it.",
+      "developments": [
+        "The pre-registered trigger, a demand-led down-revision in hyperscaler capex guidance, did not fire in the first quarter it could be tested. Alphabet raised its 2026 guide to $195-205B, Meta narrowed upward to $130-145B, and Microsoft held its calendar-2026 plan.",
+        "Microsoft and Meta reported the same evening, 29 July, which strips out the day's macro and leaves the cross-section. Microsoft rose about 7% after hours; Meta fell 9.64%.",
+        "Microsoft's coverage evidence: revenue $90.01B against $87.62B expected, Azure past $100B across the fiscal year (+41%) and +43% in the quarter, next-quarter growth guided near 45% in constant currency, and a commercial backlog above twice the year's $331.84B of revenue. Its own free cash flow fell 23% to $19.64B.",
+        "Meta's compression evidence: revenue beat at $60.8B, but EPS of $6.18 missed a ~$7.17 consensus, operating margin fell to 31% from 43%, and free cash flow was $784M as $31.9B of operating cash flow was consumed by $30.1B of property and equipment.",
+        "Microsoft's headline capex fell to roughly $175B from the ~$190B the market expected. The move is a reclassification of future data-centre leases from finance to operating, which sit outside capex, and not a spending cut.",
+        "The FY2026 Form 10-K does not contain the 25-year useful life reported from the earnings call: it states buildings at five to 15 years and servers at two to six, with no change-in-accounting-estimate disclosure. The extension is forward guidance about a period not yet reported.",
+        "Microsoft's filed contractual obligations total $743.8B: leases including imputed interest $443.5B (only $32.4B due in FY2027), purchase commitments $194.1B and construction commitments $34.6B, against $46.1B of long-term debt principal.",
+        "Investing cash outflow rose $66.9B to $139.5B, including a $22.2B increase the filing attributes primarily to facilitating the purchase of components: the memory squeeze arriving in the cash flow statement rather than the capex guide.",
+        "A correction the series owes: Issue 5 placed Meta at the self-funded end of the financing gradient. Its $784M of free cash flow, the $14B El Paso campus with BlackRock funds taking 80%, and the CFO signalling more debt and partnerships withdraw that placement."
+      ],
+      "net_read": "No trigger, and a sharper question in its place. The market now discriminates between raises identical on the number by whether contracted demand covers them. The financing gradient is not a fixed sort of firms but a ladder they descend as the bill outruns internal cash, and Meta moved down a rung in a week.",
+      "watching": [
+        "The first demand-led down-revision in hyperscaler capex guidance, unchanged as the core signal and still not fired.",
+        "Coverage as a second tracked quantity: backlog-to-revenue, cloud growth rates and free cash flow after property and equipment.",
+        "Lease and useful-life accounting as a confound on the capex line: whether the FY2027 10-K carries the change-in-estimate disclosure absent from FY2026.",
+        "The committed forward obligation stack rather than the annual guide, which no capex guidance figure captures.",
+        "Amazon and Apple (30 July) and Nvidia (late August), to close the Q2 window."
+      ]
     }
   ],
   "indicators": [
@@ -139,11 +167,31 @@
       "unit": "trigger state",
       "note": "The one thing this series watches. A down-revision in the Big Four's forward capex guide is the trigger.",
       "readings": [
-        {"issue": 1, "value": "no trigger", "note": "guidance not turned"},
-        {"issue": 2, "value": "no trigger", "note": "cannot fire before Q2"},
-        {"issue": 3, "value": "no trigger", "note": "cannot fire before Q2"},
-        {"issue": 4, "value": "no trigger", "note": "$80B Azure backlog unfilled"},
-        {"issue": 5, "value": "no trigger", "note": "days from the Q2 window"}
+        {
+          "issue": 1,
+          "value": "no trigger",
+          "note": "guidance not turned"
+        },
+        {
+          "issue": 2,
+          "value": "no trigger",
+          "note": "cannot fire before Q2"
+        },
+        {
+          "issue": 3,
+          "value": "no trigger",
+          "note": "cannot fire before Q2"
+        },
+        {
+          "issue": 4,
+          "value": "no trigger",
+          "note": "$80B Azure backlog unfilled"
+        },
+        {
+          "issue": 5,
+          "value": "no trigger",
+          "note": "days from the Q2 window"
+        }
       ]
     },
     {
@@ -151,9 +199,21 @@
       "unit": "USD",
       "note": "Combined forward capital-expenditure guidance, the level the trigger watches for a down-revision.",
       "readings": [
-        {"issue": 1, "value": "~$660-725B", "note": "utility-grade intensity"},
-        {"issue": 4, "value": "~$725B", "note": "up ~77% on 2025"},
-        {"issue": 5, "value": "~$725B", "note": "up ~77%; TSMC raised to $60-64B"}
+        {
+          "issue": 1,
+          "value": "~$660-725B",
+          "note": "utility-grade intensity"
+        },
+        {
+          "issue": 4,
+          "value": "~$725B",
+          "note": "up ~77% on 2025"
+        },
+        {
+          "issue": 5,
+          "value": "~$725B",
+          "note": "up ~77%; TSMC raised to $60-64B"
+        }
       ]
     },
     {
@@ -161,8 +221,16 @@
       "unit": "% of revenue",
       "note": "Capital expenditure as a share of revenue, the reading behind 'utility-grade intensity on software-grade balance sheets'.",
       "readings": [
-        {"issue": 1, "value": "~46-54%", "note": "Meta ~54%, MSFT ~47%, Alphabet ~46%"},
-        {"issue": 5, "value": "~45-57%", "note": "exceeds internal cash, onto debt markets"}
+        {
+          "issue": 1,
+          "value": "~46-54%",
+          "note": "Meta ~54%, MSFT ~47%, Alphabet ~46%"
+        },
+        {
+          "issue": 5,
+          "value": "~45-57%",
+          "note": "exceeds internal cash, onto debt markets"
+        }
       ]
     },
     {
@@ -170,9 +238,21 @@
       "unit": "USD / million output tokens",
       "note": "The open-weight price floor that frontier list prices are measured against.",
       "readings": [
-        {"issue": 1, "value": "$0.87", "note": "DeepSeek V4, 75% cut made permanent"},
-        {"issue": 3, "value": "$0.28", "note": "DeepSeek V4-Flash"},
-        {"issue": 5, "value": "~$0.28", "note": "DeepSeek V4, floor of a 446x spread"}
+        {
+          "issue": 1,
+          "value": "$0.87",
+          "note": "DeepSeek V4, 75% cut made permanent"
+        },
+        {
+          "issue": 3,
+          "value": "$0.28",
+          "note": "DeepSeek V4-Flash"
+        },
+        {
+          "issue": 5,
+          "value": "~$0.28",
+          "note": "DeepSeek V4, floor of a 446x spread"
+        }
       ]
     },
     {
@@ -180,10 +260,26 @@
       "unit": "multiple",
       "note": "The ratio between the most expensive frontier model and the open-weight floor. A widening spread is the backdrop to model-routing.",
       "readings": [
-        {"issue": 1, "value": "~17-34x", "note": "DeepSeek vs Opus 4.7 / GPT-5.5"},
-        {"issue": 3, "value": "~25x", "note": "across tiers"},
-        {"issue": 4, "value": "~100x", "note": "~$10 top to free self-host"},
-        {"issue": 5, "value": "~446x", "note": "$0.28 to Claude Mythos 5 ~$125"}
+        {
+          "issue": 1,
+          "value": "~17-34x",
+          "note": "DeepSeek vs Opus 4.7 / GPT-5.5"
+        },
+        {
+          "issue": 3,
+          "value": "~25x",
+          "note": "across tiers"
+        },
+        {
+          "issue": 4,
+          "value": "~100x",
+          "note": "~$10 top to free self-host"
+        },
+        {
+          "issue": 5,
+          "value": "~446x",
+          "note": "$0.28 to Claude Mythos 5 ~$125"
+        }
       ]
     },
     {
@@ -191,8 +287,16 @@
       "unit": "% of capex",
       "note": "DRAM/HBM as a share of hyperscaler capital expenditure (SemiAnalysis); the constraint's migration from logic to memory.",
       "readings": [
-        {"issue": 1, "value": "~30%", "note": "up from ~8% in 2023"},
-        {"issue": 3, "value": "~30%", "note": "HBM sold out for 2026"}
+        {
+          "issue": 1,
+          "value": "~30%",
+          "note": "up from ~8% in 2023"
+        },
+        {
+          "issue": 3,
+          "value": "~30%",
+          "note": "HBM sold out for 2026"
+        }
       ]
     },
     {
@@ -200,8 +304,16 @@
       "unit": "usage-weighted spend",
       "note": "What the market actually pays per million tokens across all models, moving with the mix in use rather than list prices.",
       "readings": [
-        {"issue": 3, "value": "~2x since late 2025", "note": "even as per-token price fell ~90% since 2023 (Jevons)"},
-        {"issue": 5, "value": "-20% off May peak", "note": "SDLLMTK; rotation to open weights, then stagnation"}
+        {
+          "issue": 3,
+          "value": "~2x since late 2025",
+          "note": "even as per-token price fell ~90% since 2023 (Jevons)"
+        },
+        {
+          "issue": 5,
+          "value": "-20% off May peak",
+          "note": "SDLLMTK; rotation to open weights, then stagnation"
+        }
       ]
     },
     {
@@ -209,7 +321,11 @@
       "unit": "% gap",
       "note": "The gap between AI investment and AI-related sales (Allianz), a spend-ahead-of-revenue reading.",
       "readings": [
-        {"issue": 5, "value": "~46%", "note": "wider than the ~32% at the 2001 telecom peak"}
+        {
+          "issue": 5,
+          "value": "~46%",
+          "note": "wider than the ~32% at the 2001 telecom peak"
+        }
       ]
     },
     {
@@ -217,7 +333,11 @@
       "unit": "% of enterprises",
       "note": "How widely AI spend has become a managed cost problem, and how often it overruns.",
       "readings": [
-        {"issue": 3, "value": "98% manage AI spend", "note": "up from 31% in 2025; 73% overran projections"}
+        {
+          "issue": 3,
+          "value": "98% manage AI spend",
+          "note": "up from 31% in 2025; 73% overran projections"
+        }
       ]
     },
     {
@@ -225,8 +345,16 @@
       "unit": "GW accepted / submitted",
       "note": "The grid operator's own deflation of the datacentre load pipeline, the realized-completion method the sister work is built on.",
       "readings": [
-        {"issue": 2, "value": "34 of ~60 GW", "note": "2030 submissions, a 43% haircut; summer-2027 peak cut ~4 GW"},
-        {"issue": 4, "value": "38 of ~60 GW", "note": "accepted before construction; ~half firm; ~20-22% energized rate"}
+        {
+          "issue": 2,
+          "value": "34 of ~60 GW",
+          "note": "2030 submissions, a 43% haircut; summer-2027 peak cut ~4 GW"
+        },
+        {
+          "issue": 4,
+          "value": "38 of ~60 GW",
+          "note": "accepted before construction; ~half firm; ~20-22% energized rate"
+        }
       ]
     }
   ]
