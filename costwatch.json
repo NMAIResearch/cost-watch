@@ -6,7 +6,7 @@
     "orcid": "0009-0003-4213-7769",
     "author": "NM AI Research",
     "signal_name": "Hyperscaler capital-expenditure guidance turning down",
-    "signal_note": "The single indicator this series watches. A down-revision in the Big Four's forward capex guide is the trigger. It has not fired in any issue to date; it cannot fire before the quarterly reports, first testable at the late-July 2026 Q2 window."
+    "signal_note": "The single indicator this series watches. A down-revision in the Big Four's forward capex guide is the trigger. It was first testable at the late-July 2026 Q2 window and did not fire there: all four reported and none conceded a demand-led cut. It has not fired in any issue to date."
   },
   "issues": [
     {
@@ -191,6 +191,11 @@
           "issue": 5,
           "value": "no trigger",
           "note": "days from the Q2 window"
+        },
+        {
+          "issue": 6,
+          "value": "no trigger",
+          "note": "first testable quarter; none of the four conceded a demand-led cut"
         }
       ]
     },
@@ -213,6 +218,11 @@
           "issue": 5,
           "value": "~$725B",
           "note": "up ~77%; TSMC raised to $60-64B"
+        },
+        {
+          "issue": 6,
+          "value": "~$725B into the window",
+          "note": "up ~77% on ~$410B in 2025; Alphabet raised to $195-205B from $180-190B, Meta narrowed upward to $130-145B, Microsoft's stated calendar-2026 expectation fell to ~$175B from the ~$190B expected on a finance-to-operating lease reclassification, plan unchanged"
         }
       ]
     },
@@ -354,6 +364,18 @@
           "issue": 4,
           "value": "38 of ~60 GW",
           "note": "accepted before construction; ~half firm; ~20-22% energized rate"
+        }
+      ]
+    },
+    {
+      "name": "Coverage of the spend by contracted demand",
+      "unit": "backlog and free cash flow",
+      "note": "Added in issue 6 as the series' second tracked quantity, because guidance direction has pointed up for enough consecutive quarters to have stopped discriminating. Read as backlog-to-revenue and free cash flow after property and equipment, both filings quantities, rather than as a price reaction.",
+      "readings": [
+        {
+          "issue": 6,
+          "value": "MSFT backlog >2x revenue vs META FCF $784m",
+          "note": "Reported the same evening, 29 July, which strips out the day's macro. Microsoft: commercial backlog more than twice the year's $331.84B revenue, Azure past $100B and up 41% on the year, though its own free cash flow fell 23% to $19.64B. Meta: $31.86B of operating cash flow almost entirely consumed by $31.08B of capex. Microsoft rose about 7% after hours, Meta fell 9.64%."
         }
       ]
     }
