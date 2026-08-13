@@ -140,7 +140,8 @@ $('#stamp').innerHTML = 'Series concept DOI (always resolves to the latest issue
   + '<a href="' + doiUrl(DATA.series.concept_doi) + '" target="_blank" rel="noopener">'
   + esc(DATA.series.concept_doi) + '</a> &middot; ' + esc(DATA.series.author)
   + ' &middot; ORCID <a href="https://orcid.org/' + esc(DATA.series.orcid)
-  + '" target="_blank" rel="noopener">' + esc(DATA.series.orcid) + '</a> &middot; CC BY 4.0';
+  + '" target="_blank" rel="noopener">' + esc(DATA.series.orcid) + '</a> &middot; CC BY 4.0'
+  + '<br><span style="font-style:italic">AI disclosure: the research is the author's; this text was drafted with AI assistance and reviewed by the author. The model, and the conflict it creates, are named in the Conflict of interest section of the linked issue.</span>';
 
 // signal spine
 const anyTrig = DATA.issues.some(i => i.trigger);

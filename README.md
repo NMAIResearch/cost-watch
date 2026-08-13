@@ -5,6 +5,8 @@ An interactive front-end over the *AI Cost Watch* series: a recurring, dated not
 **Live:** https://nmairesearch.github.io/cost-watch/
 **Series concept DOI (always the latest issue):** [10.5281/zenodo.20541643](https://doi.org/10.5281/zenodo.20541643)
 
+*AI disclosure: the research is the author's; this text was drafted with AI assistance and reviewed by the author. The model, and the conflict it creates, are named in the Conflict of interest section of the linked issue.*
+
 ## What it does
 
 Two views over the same frozen dataset:
