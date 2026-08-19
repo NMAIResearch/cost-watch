@@ -1,19 +1,52 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>AI Cost Watch (interactive)</title>
 <style>
-  :root{
-    --navy:#1a365d; --slate:#4a5568; --body:#2d3748; --alt:#f7fafc;
-    --line:#e2e8f0; --good:#276749; --goodbg:#f0fff4; --bad:#9b2c2c; --badbg:#fff5f5;
-    --accent:#2b6cb0; --amber:#975a16; --amberbg:#fffaf0;
+  :root {
+    --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  }
+  html[data-theme="light"] {
+    --bg: #f8fafc;
+    --bg-card: #ffffff;
+    --navy: #1a365d;
+    --slate: #4a5568;
+    --body: #2d3748;
+    --alt: #f1f5f9;
+    --line: #cbd5e1;
+    --good: #15803d;
+    --goodbg: #f0fdf4;
+    --bad: #b91c1c;
+    --badbg: #fef2f2;
+    --accent: #2563eb;
+    --amber: #b45309;
+    --amberbg: #fffbeb;
+  }
+  html[data-theme="dark"] {
+    --bg: #0b0f19;
+    --bg-card: #111827;
+    --navy: #ffffff;
+    --slate: #94a3b8;
+    --body: #f1f5f9;
+    --alt: #162032;
+    --line: #1e293b;
+    --good: #34d399;
+    --goodbg: rgba(52,211,153,0.15);
+    --bad: #f87171;
+    --badbg: rgba(248,113,113,0.15);
+    --accent: #38bdf8;
+    --amber: #f59e0b;
+    --amberbg: rgba(245,158,11,0.15);
   }
   *{box-sizing:border-box}
   body{font-family:Arial,Helvetica,sans-serif;color:var(--body);margin:0;
-    background:#fff;line-height:1.5;-webkit-font-smoothing:antialiased}
+    background:var(--bg);line-height:1.5;-webkit-font-smoothing:antialiased;transition:background .15s, color .15s}
   .wrap{max-width:1000px;margin:0 auto;padding:28px 22px 64px}
+  .header-bar{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:12px}
+  .theme-toggle-btn{font-family:var(--mono);font-size:11px;padding:4px 10px;border-radius:4px;border:1px solid var(--line);background:var(--bg-card);color:var(--body);cursor:pointer;display:inline-flex;align-items:center;gap:5px}
+  .theme-toggle-btn:hover{border-color:var(--accent);color:var(--accent)}
   h1{color:var(--navy);font-size:26px;margin:0 0 4px}
   .sub{color:var(--slate);font-size:14px;margin:0 0 8px;max-width:760px}
   .stamp{color:var(--slate);font-size:12.5px;margin:6px 0 0}
@@ -21,7 +54,7 @@
   .stamp a:hover{text-decoration:underline}
 
   .signal{margin:20px 0 6px;padding:14px 18px;border-radius:8px;
-    border:1px solid var(--line);background:var(--alt);display:flex;
+    border:1px solid var(--line);background:var(--bg-card);display:flex;
     flex-wrap:wrap;gap:6px 18px;align-items:baseline}
   .signal .lab{font-size:11.5px;text-transform:uppercase;letter-spacing:.05em;
     color:var(--slate);font-weight:bold}
@@ -35,16 +68,16 @@
     border:1px solid var(--line);border-radius:8px}
   .ctl label{display:block;font-size:11.5px;text-transform:uppercase;letter-spacing:.04em;
     color:var(--slate);font-weight:bold;margin-bottom:6px}
-  .seg{display:inline-flex;border:1px solid var(--navy);border-radius:6px;overflow:hidden;flex-wrap:wrap}
-  .seg button{appearance:none;border:0;background:#fff;color:var(--navy);
+  .seg{display:inline-flex;border:1px solid var(--line);border-radius:6px;overflow:hidden;flex-wrap:wrap}
+  .seg button{appearance:none;border:0;background:var(--bg-card);color:var(--body);
     padding:8px 14px;font-size:13.5px;cursor:pointer;font-family:inherit}
-  .seg button+button{border-left:1px solid var(--navy)}
-  .seg button.on{background:var(--navy);color:#fff;font-weight:bold}
+  .seg button+button{border-left:1px solid var(--line)}
+  .seg button.on{background:var(--navy);color:var(--bg);font-weight:bold}
   select{padding:8px 10px;font-size:14px;font-family:inherit;
-    border:1px solid var(--line);border-radius:6px;background:#fff;color:var(--body);min-width:260px}
+    border:1px solid var(--line);border-radius:6px;background:var(--bg-card);color:var(--body);min-width:260px}
 
-  .card{margin-top:16px;border:1px solid var(--line);border-radius:8px;overflow:hidden}
-  .card .head{padding:14px 18px;background:#fbfdff;border-bottom:1px solid var(--line)}
+  .card{margin-top:16px;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--bg-card)}
+  .card .head{padding:14px 18px;background:var(--alt);border-bottom:1px solid var(--line)}
   .card .head h2{margin:0;color:var(--navy);font-size:18px}
   .card .head .meta{color:var(--slate);font-size:12.5px;margin-top:3px}
   .badge{display:inline-block;padding:2px 9px;border-radius:11px;font-size:11.5px;
@@ -76,8 +109,16 @@
 </head>
 <body>
 <div class="wrap">
-  <h1>AI Cost Watch</h1>
-  <p class="sub" id="sub"></p>
+  <div class="header-bar">
+    <div>
+      <h1 style="color:var(--navy);margin:0 0 4px;font-size:26px">AI Cost Watch</h1>
+      <p class="sub" id="sub"></p>
+    </div>
+    <button id="themeToggle" class="theme-toggle-btn" title="Toggle Light/Dark Theme">
+      <span id="themeIcon">◑</span>
+      <span id="themeLabel">THEME: LIGHT</span>
+    </button>
+  </div>
   <p class="stamp" id="stamp"></p>
 
   <div class="signal">
@@ -215,6 +256,29 @@ $('#foot').innerHTML = '<b>Method.</b> Each edition is a frozen, dated note; eve
 // initial paint
 renderEdition(DATA.issues.length - 1);
 renderIndicator(0);
+
+(function(){
+  var html = document.documentElement;
+  var btn = document.getElementById('themeToggle');
+  var lbl = document.getElementById('themeLabel');
+  var ico = document.getElementById('themeIcon');
+  function apply(theme){
+    html.setAttribute('data-theme', theme);
+    localStorage.setItem('nmai-theme', theme);
+    if(lbl && ico){
+      if(theme === 'dark'){ lbl.textContent = 'THEME: DARK'; ico.textContent = '◐'; }
+      else { lbl.textContent = 'THEME: LIGHT'; ico.textContent = '◑'; }
+    }
+  }
+  var saved = localStorage.getItem('nmai-theme') || 'light';
+  apply(saved);
+  if(btn){
+    btn.addEventListener('click', function(){
+      var curr = html.getAttribute('data-theme') || 'light';
+      apply(curr === 'dark' ? 'light' : 'dark');
+    });
+  }
+})();
 </script>
 </body>
 </html>
