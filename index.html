@@ -17,6 +17,8 @@
     --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   }
   html[data-theme="light"] {
+    --fill: #1a365d;
+    --fill-fg: #f8fafc;
     --bg: #f8fafc;
     --bg-card: #ffffff;
     --navy: #1a365d;
@@ -33,6 +35,8 @@
     --amberbg: #fffbeb;
   }
   html[data-theme="dark"] {
+    --fill: #1e293b;
+    --fill-fg: #f1f5f9;
     --bg: #0b0f19;
     --bg-card: #111827;
     --navy: #ffffff;
@@ -80,7 +84,8 @@
   .seg button{appearance:none;border:0;background:var(--bg-card);color:var(--body);
     padding:8px 14px;font-size:13.5px;cursor:pointer;font-family:inherit}
   .seg button+button{border-left:1px solid var(--line)}
-  .seg button.on{background:var(--navy);color:var(--bg);font-weight:bold}
+  input,select,textarea{background:var(--bg-card);color:var(--body);border:1px solid var(--line)}
+  .seg button.on{background:var(--fill);color:var(--fill-fg);font-weight:bold}
   select{padding:8px 10px;font-size:14px;font-family:inherit;
     border:1px solid var(--line);border-radius:6px;background:var(--bg-card);color:var(--body);min-width:260px}
 
