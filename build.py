@@ -17,20 +17,51 @@ HERE = pathlib.Path(__file__).resolve().parent
 DATA = json.loads((HERE / "costwatch.json").read_text(encoding="utf-8"))
 
 TEMPLATE = r"""<!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>AI Cost Watch (interactive)</title>
 <style>
-  :root{
-    --navy:#1a365d; --slate:#4a5568; --body:#2d3748; --alt:#f7fafc;
-    --line:#e2e8f0; --good:#276749; --goodbg:#f0fff4; --bad:#9b2c2c; --badbg:#fff5f5;
-    --accent:#2b6cb0; --amber:#975a16; --amberbg:#fffaf0;
+  html[data-theme="light"] {
+    --fill: #1a365d;
+    --fill-fg: #f8fafc;
+    --bg: #f8fafc;
+    --bg-card: #ffffff;
+    --navy: #1a365d;
+    --slate: #4a5568;
+    --body: #2d3748;
+    --alt: #f1f5f9;
+    --line: #cbd5e1;
+    --good: #15803d;
+    --goodbg: #f0fdf4;
+    --bad: #b91c1c;
+    --badbg: #fef2f2;
+    --accent: #2563eb;
+    --amber: #b45309;
+    --amberbg: #fffbeb;
+  }
+  html[data-theme="dark"] {
+    --fill: #1e293b;
+    --fill-fg: #f1f5f9;
+    --bg: #0b0f19;
+    --bg-card: #111827;
+    --navy: #ffffff;
+    --slate: #94a3b8;
+    --body: #f1f5f9;
+    --alt: #162032;
+    --line: #1e293b;
+    --good: #34d399;
+    --goodbg: rgba(52,211,153,0.15);
+    --bad: #f87171;
+    --badbg: rgba(248,113,113,0.15);
+    --accent: #38bdf8;
+    --amber: #f59e0b;
+    --amberbg: rgba(245,158,11,0.15);
   }
   *{box-sizing:border-box}
   body{font-family:Arial,Helvetica,sans-serif;color:var(--body);margin:0;
-    background:#fff;line-height:1.5;-webkit-font-smoothing:antialiased}
+    background:var(--bg);line-height:1.5;-webkit-font-smoothing:antialiased}
   .wrap{max-width:1000px;margin:0 auto;padding:28px 22px 64px}
   h1{color:var(--navy);font-size:26px;margin:0 0 4px}
   .sub{color:var(--slate);font-size:14px;margin:0 0 8px;max-width:760px}
@@ -57,7 +88,7 @@ TEMPLATE = r"""<!DOCTYPE html>
   .seg button{appearance:none;border:0;background:#fff;color:var(--navy);
     padding:8px 14px;font-size:13.5px;cursor:pointer;font-family:inherit}
   .seg button+button{border-left:1px solid var(--navy)}
-  .seg button.on{background:var(--navy);color:#fff;font-weight:bold}
+  .seg button.on{background:var(--fill);color:var(--fill-fg);font-weight:bold}
   select{padding:8px 10px;font-size:14px;font-family:inherit;
     border:1px solid var(--line);border-radius:6px;background:#fff;color:var(--body);min-width:260px}
 
@@ -82,7 +113,7 @@ TEMPLATE = r"""<!DOCTYPE html>
   .net b{color:var(--navy)}
 
   table{width:100%;border-collapse:collapse;font-size:13.5px;margin-top:6px}
-  thead th{background:var(--navy);color:#fff;text-align:left;padding:9px 10px;font-size:12.5px}
+  thead th{background:var(--fill);color:var(--fill-fg);text-align:left;padding:9px 10px;font-size:12.5px}
   tbody td{padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
   tbody tr:nth-child(even){background:var(--alt)}
   td.val{font-weight:bold;color:var(--navy);white-space:nowrap;font-variant-numeric:tabular-nums}
@@ -90,7 +121,12 @@ TEMPLATE = r"""<!DOCTYPE html>
   .foot{margin-top:26px;font-size:12px;color:var(--slate);line-height:1.55}
   .foot b{color:var(--body)}
   .hide{display:none}
+  .themebtn{position:fixed;top:14px;right:14px;z-index:99;font:600 11px/1 Arial,Helvetica,sans-serif;
+    letter-spacing:.05em;padding:7px 11px;border-radius:5px;cursor:pointer;
+    border:1px solid var(--line);background:var(--bg-card,var(--alt));color:var(--slate)}
+  .themebtn:hover{border-color:var(--accent);color:var(--accent)}
 </style>
+<script>(function(){try{var t=localStorage.getItem('nmai-theme');if(t){document.documentElement.setAttribute('data-theme',t);}}catch(e){}})();</script>
 </head>
 <body>
 <div class="wrap">
@@ -234,6 +270,14 @@ $('#foot').innerHTML = '<b>Method.</b> Each edition is a frozen, dated note; eve
 renderEdition(DATA.issues.length - 1);
 renderIndicator(0);
 </script>
+<script>(function(){
+  var b=document.createElement('button');b.className='themebtn';
+  function lbl(){b.textContent=(document.documentElement.getAttribute('data-theme')==='dark')?'\u25D1 LIGHT':'\u25D1 DARK';}
+  b.onclick=function(){var d=document.documentElement.getAttribute('data-theme')==='dark';
+    var n=d?'light':'dark';document.documentElement.setAttribute('data-theme',n);
+    try{localStorage.setItem('nmai-theme',n);}catch(e){}lbl();};
+  lbl();document.body.appendChild(b);
+})();</script>
 </body>
 </html>
 """

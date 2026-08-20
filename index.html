@@ -4,18 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>AI Cost Watch (interactive)</title>
-<script>
-(function(){
-  try {
-    var t = localStorage.getItem('nmai-theme');
-    if (t) { document.documentElement.setAttribute('data-theme', t); }
-  } catch(e){}
-})();
-</script>
 <style>
-  :root {
-    --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  }
   html[data-theme="light"] {
     --fill: #1a365d;
     --fill-fg: #f8fafc;
@@ -54,11 +43,8 @@
   }
   *{box-sizing:border-box}
   body{font-family:Arial,Helvetica,sans-serif;color:var(--body);margin:0;
-    background:var(--bg);line-height:1.5;-webkit-font-smoothing:antialiased;transition:background .15s, color .15s}
+    background:var(--bg);line-height:1.5;-webkit-font-smoothing:antialiased}
   .wrap{max-width:1000px;margin:0 auto;padding:28px 22px 64px}
-  .header-bar{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:12px}
-  .theme-toggle-btn{font-family:var(--mono);font-size:11px;padding:4px 10px;border-radius:4px;border:1px solid var(--line);background:var(--bg-card);color:var(--body);cursor:pointer;display:inline-flex;align-items:center;gap:5px}
-  .theme-toggle-btn:hover{border-color:var(--accent);color:var(--accent)}
   h1{color:var(--navy);font-size:26px;margin:0 0 4px}
   .sub{color:var(--slate);font-size:14px;margin:0 0 8px;max-width:760px}
   .stamp{color:var(--slate);font-size:12.5px;margin:6px 0 0}
@@ -66,7 +52,7 @@
   .stamp a:hover{text-decoration:underline}
 
   .signal{margin:20px 0 6px;padding:14px 18px;border-radius:8px;
-    border:1px solid var(--line);background:var(--bg-card);display:flex;
+    border:1px solid var(--line);background:var(--alt);display:flex;
     flex-wrap:wrap;gap:6px 18px;align-items:baseline}
   .signal .lab{font-size:11.5px;text-transform:uppercase;letter-spacing:.05em;
     color:var(--slate);font-weight:bold}
@@ -80,17 +66,16 @@
     border:1px solid var(--line);border-radius:8px}
   .ctl label{display:block;font-size:11.5px;text-transform:uppercase;letter-spacing:.04em;
     color:var(--slate);font-weight:bold;margin-bottom:6px}
-  .seg{display:inline-flex;border:1px solid var(--line);border-radius:6px;overflow:hidden;flex-wrap:wrap}
-  .seg button{appearance:none;border:0;background:var(--bg-card);color:var(--body);
+  .seg{display:inline-flex;border:1px solid var(--navy);border-radius:6px;overflow:hidden;flex-wrap:wrap}
+  .seg button{appearance:none;border:0;background:#fff;color:var(--navy);
     padding:8px 14px;font-size:13.5px;cursor:pointer;font-family:inherit}
-  .seg button+button{border-left:1px solid var(--line)}
-  input,select,textarea{background:var(--bg-card);color:var(--body);border:1px solid var(--line)}
+  .seg button+button{border-left:1px solid var(--navy)}
   .seg button.on{background:var(--fill);color:var(--fill-fg);font-weight:bold}
   select{padding:8px 10px;font-size:14px;font-family:inherit;
-    border:1px solid var(--line);border-radius:6px;background:var(--bg-card);color:var(--body);min-width:260px}
+    border:1px solid var(--line);border-radius:6px;background:#fff;color:var(--body);min-width:260px}
 
-  .card{margin-top:16px;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--bg-card)}
-  .card .head{padding:14px 18px;background:var(--alt);border-bottom:1px solid var(--line)}
+  .card{margin-top:16px;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+  .card .head{padding:14px 18px;background:#fbfdff;border-bottom:1px solid var(--line)}
   .card .head h2{margin:0;color:var(--navy);font-size:18px}
   .card .head .meta{color:var(--slate);font-size:12.5px;margin-top:3px}
   .badge{display:inline-block;padding:2px 9px;border-radius:11px;font-size:11.5px;
@@ -110,7 +95,7 @@
   .net b{color:var(--navy)}
 
   table{width:100%;border-collapse:collapse;font-size:13.5px;margin-top:6px}
-  thead th{background:var(--navy);color:#fff;text-align:left;padding:9px 10px;font-size:12.5px}
+  thead th{background:var(--fill);color:var(--fill-fg);text-align:left;padding:9px 10px;font-size:12.5px}
   tbody td{padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
   tbody tr:nth-child(even){background:var(--alt)}
   td.val{font-weight:bold;color:var(--navy);white-space:nowrap;font-variant-numeric:tabular-nums}
@@ -118,20 +103,17 @@
   .foot{margin-top:26px;font-size:12px;color:var(--slate);line-height:1.55}
   .foot b{color:var(--body)}
   .hide{display:none}
+  .themebtn{position:fixed;top:14px;right:14px;z-index:99;font:600 11px/1 Arial,Helvetica,sans-serif;
+    letter-spacing:.05em;padding:7px 11px;border-radius:5px;cursor:pointer;
+    border:1px solid var(--line);background:var(--bg-card,var(--alt));color:var(--slate)}
+  .themebtn:hover{border-color:var(--accent);color:var(--accent)}
 </style>
+<script>(function(){try{var t=localStorage.getItem('nmai-theme');if(t){document.documentElement.setAttribute('data-theme',t);}}catch(e){}})();</script>
 </head>
 <body>
 <div class="wrap">
-  <div class="header-bar">
-    <div>
-      <h1 style="color:var(--navy);margin:0 0 4px;font-size:26px">AI Cost Watch</h1>
-      <p class="sub" id="sub"></p>
-    </div>
-    <button id="themeToggle" class="theme-toggle-btn" title="Toggle Light/Dark Theme">
-      <span id="themeIcon">◑</span>
-      <span id="themeLabel">THEME: LIGHT</span>
-    </button>
-  </div>
+  <h1>AI Cost Watch</h1>
+  <p class="sub" id="sub"></p>
   <p class="stamp" id="stamp"></p>
 
   <div class="signal">
@@ -177,7 +159,7 @@ $('#stamp').innerHTML = 'Series concept DOI (always resolves to the latest issue
   + esc(DATA.series.concept_doi) + '</a> &middot; ' + esc(DATA.series.author)
   + ' &middot; ORCID <a href="https://orcid.org/' + esc(DATA.series.orcid)
   + '" target="_blank" rel="noopener">' + esc(DATA.series.orcid) + '</a> &middot; CC BY 4.0'
-  + '<br><span style="font-style:italic">AI disclosure: the research is the author\'s; this text was drafted with AI assistance and reviewed by the author. The model, and the conflict it creates, are named in the Conflict of interest section of the linked issue.</span>';
+  + '<br><span style="font-style:italic">AI disclosure: the research is the author's; this text was drafted with AI assistance and reviewed by the author. The model, and the conflict it creates, are named in the Conflict of interest section of the linked issue.</span>';
 
 // signal spine
 const anyTrig = DATA.issues.some(i => i.trigger);
@@ -269,29 +251,14 @@ $('#foot').innerHTML = '<b>Method.</b> Each edition is a frozen, dated note; eve
 // initial paint
 renderEdition(DATA.issues.length - 1);
 renderIndicator(0);
-
-(function(){
-  var html = document.documentElement;
-  var btn = document.getElementById('themeToggle');
-  var lbl = document.getElementById('themeLabel');
-  var ico = document.getElementById('themeIcon');
-  function apply(theme){
-    html.setAttribute('data-theme', theme);
-    try { localStorage.setItem('nmai-theme', theme); } catch(e){}
-    if(lbl && ico){
-      if(theme === 'dark'){ lbl.textContent = 'THEME: DARK'; ico.textContent = '◐'; }
-      else { lbl.textContent = 'THEME: LIGHT'; ico.textContent = '◑'; }
-    }
-  }
-  var curr = html.getAttribute('data-theme') || 'light';
-  apply(curr);
-  if(btn){
-    btn.addEventListener('click', function(){
-      var now = html.getAttribute('data-theme') || 'light';
-      apply(now === 'dark' ? 'light' : 'dark');
-    });
-  }
-})();
 </script>
+<script>(function(){
+  var b=document.createElement('button');b.className='themebtn';
+  function lbl(){b.textContent=(document.documentElement.getAttribute('data-theme')==='dark')?'\u25D1 LIGHT':'\u25D1 DARK';}
+  b.onclick=function(){var d=document.documentElement.getAttribute('data-theme')==='dark';
+    var n=d?'light':'dark';document.documentElement.setAttribute('data-theme',n);
+    try{localStorage.setItem('nmai-theme',n);}catch(e){}lbl();};
+  lbl();document.body.appendChild(b);
+})();</script>
 </body>
 </html>
